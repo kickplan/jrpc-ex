@@ -61,7 +61,7 @@ defmodule JRPC.Router do
       add_error(ctx, %Errors.InvalidParams{})
 
     e ->
-      # TODO Add logging for these errors
+      # @todo Add logging for these errors
       add_error(ctx, %Errors.InternalError{data: e.message})
   end
 

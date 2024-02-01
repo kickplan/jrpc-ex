@@ -1,6 +1,6 @@
 # jrpc-ex
 
-**TODO: Add description**
+**@todo: Add description**
 
 ## Installation
 

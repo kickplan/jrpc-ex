@@ -10,5 +10,5 @@ defmodule JRPC.Handler do
     end
   end
 
-  # TODO Add "controller"-like methods (eg. render(), etc.)
+  # @todo Add "controller"-like methods (eg. render(), etc.)
 end

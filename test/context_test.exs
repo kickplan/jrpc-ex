@@ -1,5 +1,5 @@
 defmodule JRPC.ContextTest do
-  # TODO Add example docs to modules and use `doctest`
+  # @todo Add example docs to modules and use `doctest`
   use ExUnit.Case, async: true
 
   alias JRPC.{Context, Errors, Request, Response}
