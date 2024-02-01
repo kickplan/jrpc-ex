@@ -15,7 +15,7 @@ defmodule JRPC do
   @type response :: Response.t()
 
   def errors() do
-    # TODO Add an error registry so these aren't explicit
+    # @todo Add an error registry so these aren't explicit
     [
       Errors.InternalError,
       Errors.InvalidParams,

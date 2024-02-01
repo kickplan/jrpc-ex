@@ -21,7 +21,11 @@ defmodule Jrpc.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.18.0", only: [:dev, :test], runtime: false},
       {:pluggable, "~> 1.0"},
+      {:sobelow, "~> 0.11", only: :dev}
     ]
   end
 end
