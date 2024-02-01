@@ -2,7 +2,7 @@ defmodule JRPC.ContextTest do
   # @todo Add example docs to modules and use `doctest`
   use ExUnit.Case, async: true
 
-  alias JRPC.{Context, Errors, Request, Response}
+  alias JRPC.{Context, Request, Response}
 
   setup do
     rpc = %{
@@ -38,9 +38,10 @@ defmodule JRPC.ContextTest do
 
   describe "add_error/2" do
     test "sets the response error and halts", %{ctx: ctx} do
-      ctx = Context.add_error(ctx, %Errors.InvalidRequest{})
+      error = %JRPC.InvalidRequestError{}
+      ctx = Context.add_error(ctx, error)
 
-      assert %Errors.InvalidRequest{} = ctx.response.error
+      assert %{code: error.code, message: error.message, data: nil} == ctx.response.error
       assert ctx.halted
     end
   end

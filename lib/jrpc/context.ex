@@ -2,7 +2,7 @@ defmodule JRPC.Context do
   @moduledoc false
 
   alias __MODULE__, as: Context
-  alias JRPC.{Request, Response, Router}
+  alias JRPC.{Error, Request, Response, Router}
 
   @type assigns :: %{optional(atom) => any}
   @type halted :: boolean
@@ -41,7 +41,9 @@ defmodule JRPC.Context do
 
   @spec add_error(t, error :: JRPC.error()) :: t
   def add_error(%{response: response} = ctx, error) do
-    %{ctx | halted: true, response: %{response | error: error}}
+    response = %{response | error: handle_error(error)}
+
+    %{ctx | halted: true, response: response}
   end
 
   @spec add_result(t, result :: any) :: t
@@ -52,5 +54,13 @@ defmodule JRPC.Context do
   @spec merge_assigns(t, Enumerable.t()) :: t
   def merge_assigns(%Context{assigns: assigns} = ctx, new) do
     %{ctx | assigns: Enum.into(new, assigns)}
+  end
+
+  defp handle_error(error) do
+    %{
+      code: Error.code(error),
+      data: Error.data(error),
+      message: Error.message(error)
+    }
   end
 end
