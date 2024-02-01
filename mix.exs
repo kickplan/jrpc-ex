@@ -21,7 +21,8 @@ defmodule Jrpc.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:pluggable, "~> 1.0"}
+      {:pluggable, "~> 1.0"},
+      {:sobelow, "~> 0.11", only: :dev}
     ]
   end
 end

@@ -1,3 +1,5 @@
 %{
+  "jason": {:hex, :jason, "1.4.1", "af1504e35f629ddcdd6addb3513c3853991f694921b1b9368b0bd32beb9f1b63", [:mix], [{:decimal, "~> 1.0 or ~> 2.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm", "fbb01ecdfd565b56261302f7e1fcc27c4fb8f32d56eab74db621fc154604a7a1"},
   "pluggable": {:hex, :pluggable, "1.0.1", "ffd91303879d0ccfde2cbf2b5609f4f602608653e6165c44f5867c32e645e337", [:mix], [], "hexpm", "bce3403fe24dd5e14846b97e64ffa424b7ccda327829a4f6d1067cfc7a87d4a2"},
+  "sobelow": {:hex, :sobelow, "0.13.0", "218afe9075904793f5c64b8837cc356e493d88fddde126a463839351870b8d1e", [:mix], [{:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}], "hexpm", "cd6e9026b85fc35d7529da14f95e85a078d9dd1907a9097b3ba6ac7ebbe34a0d"},
 }
