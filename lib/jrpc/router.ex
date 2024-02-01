@@ -3,9 +3,9 @@ defmodule JRPC.Router do
 
   alias __MODULE__, as: Router
   alias Router.Route
-  alias JRPC.{Context, Errors}
+  alias JRPC.Context
 
-  import Context, only: [add_error: 2]
+  import Context, only: [add_error: 2, add_result: 2]
 
   @doc false
   defmacro __using__(opts) do
@@ -35,9 +35,9 @@ defmodule JRPC.Router do
     quote location: :keep, generated: true do
       use Pluggable.StepBuilder, unquote(opts)
 
-      step :validate
-      step :match
-      step :dispatch
+      step(:validate)
+      step(:match)
+      step(:dispatch)
 
       def dispatch(ctx, _opts), do: Router.__dispatch__(ctx)
       def match(ctx, _opts), do: Router.__match__(ctx, __MODULE__)
@@ -55,20 +55,36 @@ defmodule JRPC.Router do
 
   def __dispatch__(%Context{route: route, request: request} = ctx) do
     plug_args = [ctx] ++ List.wrap(request.params)
-    apply(route.plug, route.plug_opts, plug_args)
+
+    case apply(route.plug, route.plug_opts, plug_args) do
+      {:ok, result} ->
+        add_result(ctx, result)
+
+      {:error, error} ->
+        add_error(ctx, error)
+
+      context ->
+        context
+    end
   rescue
     UndefinedFunctionError ->
-      add_error(ctx, %Errors.InvalidParams{})
+      add_error(ctx, %JRPC.InvalidParamsError{})
 
+<<<<<<< HEAD
     e ->
       # @todo Add logging for these errors
       add_error(ctx, %Errors.InternalError{data: e.message})
+=======
+    error ->
+      # TODO Add logging for these errors
+      add_error(ctx, error)
+>>>>>>> 4a5029f (feat: Add protocol for JRPC.Error)
   end
 
   def __match__(%Context{request: request} = ctx, router) do
     case router.__match_route__(request.method) do
       :error ->
-        add_error(ctx, %Errors.MethodNotFound{})
+        add_error(ctx, %JRPC.MethodNotFoundError{})
 
       route ->
         %{ctx | route: route}
@@ -76,7 +92,7 @@ defmodule JRPC.Router do
   end
 
   def __validate__(%Context{request: %{valid?: false}} = ctx) do
-    add_error(ctx, %Errors.InvalidRequest{})
+    add_error(ctx, %JRPC.InvalidRequestError{})
   end
 
   def __validate__(%Context{} = ctx), do: ctx

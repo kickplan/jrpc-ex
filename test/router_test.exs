@@ -27,8 +27,12 @@ defmodule JRPC.RouterTest do
       add_result(ctx, [Map.get(assigns, :name), id])
     end
 
-    def with_error(ctx) do
-      add_error(ctx, %RuntimeError{})
+    def with_ok_return(_ctx) do
+      {:ok, :success}
+    end
+
+    def with_error_return(_ctx) do
+      {:error, %RuntimeError{}}
     end
 
     def with_exception(_ctx) do
@@ -44,7 +48,8 @@ defmodule JRPC.RouterTest do
     rpc "ex.map", Example.Handler, :map_arg
     rpc "ex.list", Example.Handler, :list_args
     rpc "ex.assigns", Example.Handler, :with_assigns
-    rpc "ex.error", Example.Handler, :with_error
+    rpc "ex.ok_return", Example.Handler, :with_ok_return
+    rpc "ex.error_return", Example.Handler, :with_error_return
     rpc "ex.exception", Example.Handler, :with_exception
   end
 
@@ -68,11 +73,14 @@ defmodule JRPC.RouterTest do
                Example.Router.handle(rpc, %{name: "John"})
     end
 
-    test "accepts errors as a return value" do
-      rpc = Example.rpc("ex.error")
+    test "accepts `{:ok, result}` as a return value" do
+      rpc = Example.rpc("ex.ok_return")
+      assert %Response{result: :success} = Example.Router.handle(rpc)
+    end
 
-      assert %Response{error: %RuntimeError{}} =
-               Example.Router.handle(rpc)
+    test "accepts `{:error, error}` as a return value" do
+      rpc = Example.rpc("ex.error_return")
+      assert %Response{error: %{}} = Example.Router.handle(rpc)
     end
 
     test "populates the response id" do
@@ -121,8 +129,7 @@ defmodule JRPC.RouterTest do
                Example.Router.handle(rpc)
 
       assert -32_603 = error.code
-      assert "Internal error" = error.message
-      assert "An error occurred" = error.data
+      assert "An error occurred" = error.message
     end
   end
 end
