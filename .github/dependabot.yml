@@ -1,0 +1,11 @@
+# https://github.com/felt/ultimate-elixir-ci/blob/main/.github/dependabot.yml
+# Used under MIT License: https://github.com/felt/ultimate-elixir-ci/blob/main/LICENSE
+
+version: 2
+updates:
+  - package-ecosystem: mix
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "12:00"
+    open-pull-requests-limit: 10
