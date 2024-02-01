@@ -35,9 +35,9 @@ defmodule JRPC.Router do
     quote location: :keep, generated: true do
       use Pluggable.StepBuilder, unquote(opts)
 
-      step(:validate)
-      step(:match)
-      step(:dispatch)
+      step :validate
+      step :match
+      step :dispatch
 
       def dispatch(ctx, _opts), do: Router.__dispatch__(ctx)
       def match(ctx, _opts), do: Router.__match__(ctx, __MODULE__)
@@ -70,15 +70,9 @@ defmodule JRPC.Router do
     UndefinedFunctionError ->
       add_error(ctx, %JRPC.InvalidParamsError{})
 
-<<<<<<< HEAD
-    e ->
-      # @todo Add logging for these errors
-      add_error(ctx, %Errors.InternalError{data: e.message})
-=======
     error ->
-      # TODO Add logging for these errors
+      # @todo Add logging for these errors
       add_error(ctx, error)
->>>>>>> 4a5029f (feat: Add protocol for JRPC.Error)
   end
 
   def __match__(%Context{request: request} = ctx, router) do
