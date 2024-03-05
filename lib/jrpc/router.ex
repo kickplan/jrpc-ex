@@ -67,7 +67,7 @@ defmodule JRPC.Router do
         context
     end
   rescue
-    UndefinedFunctionError ->
+    [UndefinedFunctionError, FunctionClauseError] ->
       add_error(ctx, %JRPC.InvalidParamsError{})
 
     error ->

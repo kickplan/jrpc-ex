@@ -112,8 +112,16 @@ defmodule JRPC.RouterTest do
       assert "Method not found" = error.message
     end
 
-    test "returns a InvalidParams error when invalid params" do
+    test "returns a InvalidParams error with invalid params" do
       rpc = Example.rpc("ex.none", 10)
+
+      assert %Response{result: nil, error: error} =
+               Example.Router.handle(rpc)
+
+      assert -32_602 = error.code
+      assert "Invalid params" = error.message
+
+      rpc = Example.rpc("ex.map", %{"key" => "invalid"})
 
       assert %Response{result: nil, error: error} =
                Example.Router.handle(rpc)
