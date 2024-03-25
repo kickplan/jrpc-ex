@@ -6,6 +6,6 @@
   "excoveralls": {:hex, :excoveralls, "0.18.0", "b92497e69465dc51bc37a6422226ee690ab437e4c06877e836f1c18daeb35da9", [:mix], [{:castore, "~> 1.0", [hex: :castore, repo: "hexpm", optional: true]}, {:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}], "hexpm", "1109bb911f3cb583401760be49c02cbbd16aed66ea9509fc5479335d284da60b"},
   "file_system": {:hex, :file_system, "1.0.0", "b689cc7dcee665f774de94b5a832e578bd7963c8e637ef940cd44327db7de2cd", [:mix], [], "hexpm", "6752092d66aec5a10e662aefeed8ddb9531d79db0bc145bb8c40325ca1d8536d"},
   "jason": {:hex, :jason, "1.4.1", "af1504e35f629ddcdd6addb3513c3853991f694921b1b9368b0bd32beb9f1b63", [:mix], [{:decimal, "~> 1.0 or ~> 2.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm", "fbb01ecdfd565b56261302f7e1fcc27c4fb8f32d56eab74db621fc154604a7a1"},
-  "pluggable": {:hex, :pluggable, "1.0.1", "ffd91303879d0ccfde2cbf2b5609f4f602608653e6165c44f5867c32e645e337", [:mix], [], "hexpm", "bce3403fe24dd5e14846b97e64ffa424b7ccda327829a4f6d1067cfc7a87d4a2"},
+  "pluggable": {:hex, :pluggable, "1.1.0", "7eba3bc70c0caf4d9056c63c882df8862f7534f0145da7ab3a47ca73e4adb1e4", [:mix], [], "hexpm", "d12eb00ea47b21e92cd2700d6fbe3737f04b64e71b63aad1c0accde87c751637"},
   "sobelow": {:hex, :sobelow, "0.13.0", "218afe9075904793f5c64b8837cc356e493d88fddde126a463839351870b8d1e", [:mix], [{:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}], "hexpm", "cd6e9026b85fc35d7529da14f95e85a078d9dd1907a9097b3ba6ac7ebbe34a0d"},
 }
